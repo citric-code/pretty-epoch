@@ -1,0 +1,44 @@
+
+/*#pe2-popup * {*/
+/*    all: initial !important*/
+/*}*/
+
+p#pe2-popup {
+
+}
+
+#pe2-popup {
+    left: 0%;
+    padding: 20px;
+    position: absolute;
+    top: 0%;
+    width: fit-content;
+    z-index: 1000;
+    background-color: white;
+    box-shadow: 0px 5px 16px rgba(0,0,0,0.4);
+    border: solid 1px #ddd;
+    border-radius: 6px;
+    text-align: left;
+    visibility: hidden;
+
+    display: block;
+    unicode-bidi: isolate;
+}
+
+#pe2-popup-content {
+    line-height: 5px;
+    font-size: 14px;
+    font-family: open sans, lucida grande, sans-serif;
+    font-weight: 400;
+    color: #000;
+}
+
+.h3-no-padding-top {
+    padding-top: 0px !important;
+}
+
+#pe2-popup h3 {
+    text-align: left;
+    padding: 2px;
+    padding-top: 20px;
+}

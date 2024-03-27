@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "Pretty Epoch",
+  "description": "Displays epoch timestamps as a readable date format",
+  "author": "Citric Code",
+  "version": "1.0",
+  "permissions": [
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "blue_clock.png"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "css": [
+        "highlight_popup.css"
+      ],
+      "js": [
+        "jquery-3.7.1.min.js",
+        "pretty-epoch.js"
+      ],
+      "all_frames": true
+    }
+  ]
+}

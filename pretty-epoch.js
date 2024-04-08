@@ -37,7 +37,7 @@ $(document).ready(function () {
     });
 });
 
-const local_date_formatter = new Intl.DateTimeFormat(
+const utc_date_formatter = new Intl.DateTimeFormat(
                                     'en-GB',
                                     {
                                         dateStyle: 'medium',
@@ -46,11 +46,20 @@ const local_date_formatter = new Intl.DateTimeFormat(
                                     }
                                 );
 
-function showPopup(e, utcDateStr, timeDifference) {
+const local_date_formatter = new Intl.DateTimeFormat(
+                                    'en-GB',
+                                    {
+                                        dateStyle: 'medium',
+                                        timeStyle: 'long',
+                                        timeZone: 'Europe/London',
+                                    }
+                                );
+
+function showPopup(e, utcDateStr, localFormatDateStr, timeDifference) {
     $('#pe2-popup').css('top', e.pageY + 20 + "px");
     $('#pe2-popup').css('left', e.pageX - 105 + "px");
     $('#pretty-epoch-UTC').html(utcDateStr);
-    $('#pretty-epoch-local-time').html(utcDateStr);
+    $('#pretty-epoch-local-time').html(localFormatDateStr);
     $('#pretty-epoch-difference').html(timeDifference);
     $('#pe2-popup').css('visibility', 'visible');
 }
@@ -67,7 +76,7 @@ function processSelectedText(e) {
         }
         var date = timestampToDate(text);
 
-        showPopup(e, getUTCString(date), compareDateWithCurrentTime(date));
+        showPopup(e, getUTCString(date), getLocalTimeString(date), compareDateWithCurrentTime(date));
         lastSelectedDate = date
         last_highlighted_timestamp = e.timeStamp
     }
@@ -91,9 +100,12 @@ function timestampToDate(ts) {
 }
 
 function getUTCString(date) {
-    return local_date_formatter.format(date);
+    return utc_date_formatter.format(date);
 }
 
+function getLocalTimeString(date) {
+    return local_date_formatter.format(date)
+}
 
 function compareDateWithCurrentTime(date) {
     // Calculate the difference in milliseconds between the provided datetime and the current datetime

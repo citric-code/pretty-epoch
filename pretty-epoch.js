@@ -112,10 +112,10 @@ function compareDateWithCurrentTime(date) {
     const differenceMs = new Date() - date;
 
     // Convert milliseconds to seconds
-    const differenceSeconds = Math.floor(differenceMs / 1000);
+    const differenceSeconds = Math.floor(Math.abs(differenceMs) / 1000);
 
     // Convert seconds to minutes
-    const differenceMinutes = Math.floor((differenceMs / 1000) / 60);
+    const differenceMinutes = Math.floor(differenceSeconds / 60);
 
     // Convert minutes to hours
     const differenceHours = Math.floor(differenceMinutes / 60);
@@ -135,11 +135,20 @@ function compareDateWithCurrentTime(date) {
     const timePassed = timeIntervals.find(interval => interval.value > 0);
 
     // Construct the human-readable string
-    if (timePassed) {
-        const plural = timePassed.value !== 1 ? "s" : ""; // Add plural "s" if necessary
-        return `${timePassed.value} ${timePassed.unit}${plural} ago`;
+    if (differenceMs >= 0) {
+        if (timePassed) {
+            const plural = timePassed.value !== 1 ? "s" : ""; // Add plural "s" if necessary
+            return `${timePassed.value} ${timePassed.unit}${plural} ago`;
+        } else {
+            return "Just now";
+        }
     } else {
-        return "Just now";
+        if (timePassed) {
+            const plural = timePassed.value !== 1 ? "s" : ""; // Add plural "s" if necessary
+            return `in ${timePassed.value} ${timePassed.unit}${plural}`;
+        } else {
+            return "Just now";
+        }
     }
 }
 
